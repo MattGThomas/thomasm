@@ -3,8 +3,7 @@ import { MDBContainer, MDBCard } from "mdbreact";
 import Axios from "axios";
 // import Expense from "./components/Expenses/Expense.js";
 import ExpenseList from "./components/Expenses/ExpenseList";
-
-import Form from "./components/Form/Form.js";
+import AddExpenseForm from "./components/Expenses/AddExpenseForm.js";
 
 class App extends Component {
   state = {
@@ -22,6 +21,12 @@ class App extends Component {
         console.log(`this is the error: ${err}`);
       });
   }
+
+  updateExpenses = (expenses) => {
+    this.setState({
+      expenses,
+    });
+  };
 
   // ********************************************************************************************
   render() {
@@ -46,7 +51,7 @@ class App extends Component {
             <p>lorem</p>
           </MDBCard>
 
-          <Form />
+          <AddExpenseForm updateExpenses={this.updateExpenses} />
         </MDBContainer>
       </div>
     );
