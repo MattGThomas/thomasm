@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MDBContainer, MDBCard } from "mdbreact";
+import { MDBContainer, MDBCard, MDBBtn } from "mdbreact";
 import Axios from "axios";
 // import Expense from "./components/Expenses/Expense.js";
 import ExpenseList from "./components/Expenses/ExpenseList";
@@ -28,6 +28,16 @@ class App extends Component {
     });
   };
 
+  deleteAllExpenses() {
+    Axios.delete("http://localhost:3000/expenses")
+      .then((res) => {
+        window.location.reload(true);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  }
+
   // ********************************************************************************************
   render() {
     let { expenses } = this.state;
@@ -52,6 +62,7 @@ class App extends Component {
           </MDBCard>
 
           <AddExpenseForm updateExpenses={this.updateExpenses} />
+          <MDBBtn onClick={this.deleteAllExpenses}>DELETE ALL EXPENSES</MDBBtn>
         </MDBContainer>
       </div>
     );

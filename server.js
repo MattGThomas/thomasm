@@ -77,6 +77,13 @@ server.delete("/expenses/:id", function (req, res) {
   );
 });
 
+server.delete("/expenses", function (req, res) {
+  connection.query("DELETE FROM expenses", function (error, results, fields) {
+    if (error) throw error;
+    res.end("christmas has successfully been cancelled");
+  });
+});
+
 // require("./expenses/expenses-router.js")(server);
 server.listen(3000, () => {
   console.log("server is running on port 3000");
