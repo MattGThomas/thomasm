@@ -4,6 +4,7 @@ import Axios from "axios";
 // import Expense from "./components/Expenses/Expense.js";
 import ExpenseList from "./components/Expenses/ExpenseList";
 import AddExpenseForm from "./components/Expenses/AddExpenseForm.js";
+import EditExpenseForm from "./components/Expenses/EditExpenseForm.js";
 
 class App extends Component {
   state = {
@@ -57,11 +58,10 @@ class App extends Component {
               );
             })} */}
             <ExpenseList expenses={this.state.expenses} />
-            <h2>lorem</h2>
-            <p>lorem</p>
           </MDBCard>
 
           <AddExpenseForm updateExpenses={this.updateExpenses} />
+          <EditExpenseForm updateExpenses={this.updateExpenses} />
           <MDBBtn onClick={this.deleteAllExpenses}>DELETE ALL EXPENSES</MDBBtn>
         </MDBContainer>
       </div>

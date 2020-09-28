@@ -7,7 +7,7 @@ class AddExpenseForm extends Component {
   state = {
     name: "",
     type: "",
-    price: 0,
+    price: null,
     error: null,
   };
   changeHandler = (evt) => {
@@ -55,20 +55,22 @@ class AddExpenseForm extends Component {
             onChange={this.changeHandler}
             required
           />
-          <select
-            value={this.state.type}
-            onChange={this.selectChangeHandler}
-            required
-          >
-            <option defaultValue="">Please select a type</option>
-            <option value="Groceries">Groceries</option>
-            <option value="Automotive">Automotve</option>
-            <option value="Bills">Bills</option>
-          </select>
+          <div>
+            <select
+              value={this.state.type}
+              onChange={this.selectChangeHandler}
+              required
+            >
+              <option defaultValue="">Please select a type</option>
+              <option value="Groceries">Groceries</option>
+              <option value="Automotive">Automotve</option>
+              <option value="Bills">Bills</option>
+            </select>
+          </div>
           <MDBInput
-            label="price"
+            label="Price"
             name="price"
-            type="int"
+            type="number"
             value={this.state.price}
             onChange={this.changeHandler}
             required

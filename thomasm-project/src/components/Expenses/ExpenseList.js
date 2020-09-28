@@ -3,10 +3,6 @@ import Expense from "./Expense.js";
 import Axios from "axios";
 
 class ExpenseList extends Component {
-  state = {
-    error: null,
-  };
-
   render() {
     return (
       <div>

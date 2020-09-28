@@ -54,7 +54,7 @@ server.post("/expenses", function (req, res) {
   });
 });
 
-server.put("/expenses/:id", function (req, res) {
+server.put("/expenses", function (req, res) {
   connection.query(
     "UPDATE `expenses` SET `name` =?, `type`=?, `price`=? where `id`=?",
     [req.body.name, req.body.type, req.body.price, req.body.id],
