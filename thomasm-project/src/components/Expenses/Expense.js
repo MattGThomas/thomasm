@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { MDBIcon } from "mdbreact";
-import Modal from "../Update/Modal.js";
-import Axios from "axios";
+
 class Expense extends Component {
   constructor(props) {
     super(props);

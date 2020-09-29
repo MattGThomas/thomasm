@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 
-import { MDBBtn, MDBInput, MDBIcon } from "mdbreact";
+import { MDBBtn, MDBInput } from "mdbreact";
 import Modal from "../Modal/Modal.js";
 
 class EditExpenseForm extends Component {

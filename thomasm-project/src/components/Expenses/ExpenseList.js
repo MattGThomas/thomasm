@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Expense from "./Expense.js";
-import Axios from "axios";
+
 import "./expense.css";
 
 class ExpenseList extends Component {

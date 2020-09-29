@@ -41,8 +41,6 @@ class App extends Component {
 
   // ********************************************************************************************
   render() {
-    let { expenses } = this.state;
-
     // const display_expenses = expenses.map((expense) => {
     //   return <Expense key={expense.id} expense={expense} id={expense.id} />;
     // });
