@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Axios from "axios";
 
-import { MDBBtn, MDBInput } from "mdbreact";
+import { MDBBtn, MDBInput, MDBIcon } from "mdbreact";
+import Modal from "../Modal/Modal.js";
 
 class EditExpenseForm extends Component {
   state = {
@@ -9,6 +10,18 @@ class EditExpenseForm extends Component {
     type: "",
     price: null,
     id: null,
+    showModal: false,
+  };
+
+  show = () => {
+    this.setState({
+      showModal: true,
+    });
+  };
+  hide = () => {
+    this.setState({
+      showModal: false,
+    });
   };
   changeHandler = (evt) => {
     this.setState({
@@ -39,25 +52,29 @@ class EditExpenseForm extends Component {
     // console.log("***********************", typeof parseInt(payload.id));
     // payload = parseInt(payload);
     console.log(payload);
-    Axios.delete(`http://localhost:3000/expenses/${id}`)
-      .then((res) => {
-        window.location.reload(true);
-        console.log("this is what is actually sending ", id, payload);
-        console.log(res);
-        // this.props.updateExpenses();
-      })
-      .catch((err) => {
-        console.log("err, ", err);
-      });
+    if (!id) {
+      alert("please enter an id");
+    } else {
+      Axios.delete(`http://localhost:3000/expenses/${id}`)
+        .then((res) => {
+          window.location.reload(true);
+          console.log("this is what is actually sending ", id, payload);
+          console.log(res);
+          // this.props.updateExpenses();
+        })
+        .catch((err) => {
+          console.log("err, ", err);
+        });
 
-    // axios.delete(URL, {
-    //   headers: {
-    //     Authorization: authorizationToken
-    //   },
-    //   data: {
-    //     source: source
-    //   }
-    // });
+      // axios.delete(URL, {
+      //   headers: {
+      //     Authorization: authorizationToken
+      //   },
+      //   data: {
+      //     source: source
+      //   }
+      // });
+    }
   };
   selectChangeHandler = (evt) => {
     evt.preventDefault();
@@ -70,7 +87,11 @@ class EditExpenseForm extends Component {
     return (
       <div>
         <div>
-          <h4>you can use this form to edit your current expenses</h4>
+          <p>
+            you can use this form to edit / delete{" "}
+            <i class="fas fa-info-circle" onClick={this.show} /> your current
+            expenses
+          </p>
         </div>
         <form onSubmit={this.editExpense}>
           {/* <form onSubmit={this.deleteExpense}> */}
@@ -106,6 +127,7 @@ class EditExpenseForm extends Component {
           <MDBBtn type="submit">Save Changes</MDBBtn>
           <MDBBtn onClick={this.deleteExpense}>Delete Expense</MDBBtn>
         </form>
+        <Modal show={this.state.showModal} close={this.hide} />
       </div>
     );
   }

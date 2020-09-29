@@ -1,0 +1,12 @@
+.expense-list-numbers {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: start;
+  align-items: center;
+  padding: 1rem;
+  position: absolute;
+  bottom: 0;
+}
+.expense-list-numbers:hover {
+  cursor: pointer;
+}

@@ -51,7 +51,7 @@ class App extends Component {
       <div>
         <MDBContainer>
           <div style={{ paddingBottom: "3%" }}>
-            <MDBCard>
+            <MDBCard style={{ height: "250px" }}>
               {/* {display_expenses} */}
               {/* {this.state.expenses.map((expense) => {
               return (
@@ -78,7 +78,9 @@ class App extends Component {
               </MDBCard>
             </MDBCol>
           </MDBRow>
-          <MDBBtn onClick={this.deleteAllExpenses}>DELETE ALL EXPENSES</MDBBtn>
+          <MDBBtn color="danger" onClick={this.deleteAllExpenses}>
+            DELETE ALL EXPENSES
+          </MDBBtn>
         </MDBContainer>
       </div>
     );

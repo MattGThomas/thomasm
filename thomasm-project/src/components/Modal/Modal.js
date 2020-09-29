@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBBtn, MDBInput } from "mdbreact";
+import { MDBBtn } from "mdbreact";
 import "./modal.css";
 
 const Modal = ({ close, show }) => {
@@ -8,12 +8,12 @@ const Modal = ({ close, show }) => {
   return (
     <div className={modalClass}>
       <section className="modal-main">
-        <form>
-          <MDBInput label="name" />
-          <MDBInput label="price" />
-        </form>
+        <p>
+          to delete an expense, simply input the expense id,
+          <br />
+          then click the delete expense button
+        </p>
         <MDBBtn onClick={close}>close</MDBBtn>
-        <MDBBtn>save</MDBBtn>
       </section>
     </div>
   );
