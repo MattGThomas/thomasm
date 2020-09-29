@@ -46,6 +46,9 @@ class AddExpenseForm extends Component {
   render() {
     return (
       <div>
+        <div>
+          <h4>use this form to add a new expense to the list</h4>
+        </div>
         <form onSubmit={this.addExpense}>
           <MDBInput
             label="Expense Name"

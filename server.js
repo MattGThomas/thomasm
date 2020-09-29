@@ -55,6 +55,7 @@ server.post("/expenses", function (req, res) {
 });
 
 server.put("/expenses", function (req, res) {
+  console.log(req.body);
   connection.query(
     "UPDATE `expenses` SET `name` =?, `type`=?, `price`=? where `id`=?",
     [req.body.name, req.body.type, req.body.price, req.body.id],
@@ -66,10 +67,12 @@ server.put("/expenses", function (req, res) {
 });
 
 server.delete("/expenses/:id", function (req, res) {
-  console.log(req.body);
+  console.log("this is the request body for delete", req.body);
   connection.query(
     "DELETE FROM `expenses` WHERE `id`=?",
-    [req.body.id],
+    [req.params.id],
+    // [req.params.id],
+
     function (error, results, fields) {
       if (error) throw error;
       res.end("christmas has successfully been cancelled");

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MDBContainer, MDBCard, MDBBtn } from "mdbreact";
+import { MDBContainer, MDBCard, MDBBtn, MDBRow, MDBCol } from "mdbreact";
 import Axios from "axios";
 // import Expense from "./components/Expenses/Expense.js";
 import ExpenseList from "./components/Expenses/ExpenseList";
@@ -50,18 +50,34 @@ class App extends Component {
     return (
       <div>
         <MDBContainer>
-          <MDBCard>
-            {/* {display_expenses} */}
-            {/* {this.state.expenses.map((expense) => {
+          <div style={{ paddingBottom: "3%" }}>
+            <MDBCard>
+              {/* {display_expenses} */}
+              {/* {this.state.expenses.map((expense) => {
               return (
                 <Expense key={expense.id} expense={expense} id={expense.id} />
               );
             })} */}
-            <ExpenseList expenses={this.state.expenses} />
-          </MDBCard>
-
-          <AddExpenseForm updateExpenses={this.updateExpenses} />
-          <EditExpenseForm updateExpenses={this.updateExpenses} />
+              <ExpenseList expenses={this.state.expenses} />
+            </MDBCard>
+          </div>
+          <MDBRow>
+            <MDBCol
+              // className="md-6 mb-6 d-flex align-items-stretch "
+              style={{ width: "100%" }}
+            >
+              {/* <MDBCol style={{ width: "100%" }}> */}
+              <MDBCard style={{ height: "100%" }}>
+                <AddExpenseForm updateExpenses={this.updateExpenses} />
+              </MDBCard>
+            </MDBCol>
+            {/* <MDBCol className="md-6 mb-6 d-flex align-items-stretch"> */}
+            <MDBCol style={{ width: "100%" }}>
+              <MDBCard style={{ height: "100%" }}>
+                <EditExpenseForm updateExpenses={this.updateExpenses} />
+              </MDBCard>
+            </MDBCol>
+          </MDBRow>
           <MDBBtn onClick={this.deleteAllExpenses}>DELETE ALL EXPENSES</MDBBtn>
         </MDBContainer>
       </div>

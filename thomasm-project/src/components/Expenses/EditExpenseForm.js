@@ -30,11 +30,50 @@ class EditExpenseForm extends Component {
       });
   };
 
+  deleteExpense = () => {
+    const { id } = this.state;
+    const payload = { id };
+    console.log("********* this is id, payload before call", payload);
+    // console.log("**********************", typeof payload.id);
+    // parseInt(payload.id);
+    // console.log("***********************", typeof parseInt(payload.id));
+    // payload = parseInt(payload);
+    console.log(payload);
+    Axios.delete(`http://localhost:3000/expenses/${id}`)
+      .then((res) => {
+        window.location.reload(true);
+        console.log("this is what is actually sending ", id, payload);
+        console.log(res);
+        // this.props.updateExpenses();
+      })
+      .catch((err) => {
+        console.log("err, ", err);
+      });
+
+    // axios.delete(URL, {
+    //   headers: {
+    //     Authorization: authorizationToken
+    //   },
+    //   data: {
+    //     source: source
+    //   }
+    // });
+  };
+  selectChangeHandler = (evt) => {
+    evt.preventDefault();
+    this.setState({
+      type: evt.target.value,
+    });
+  };
   render() {
     // const { name, price, type, id } = this.state;
     return (
       <div>
+        <div>
+          <h4>you can use this form to edit your current expenses</h4>
+        </div>
         <form onSubmit={this.editExpense}>
+          {/* <form onSubmit={this.deleteExpense}> */}
           <MDBInput
             label="Expense ID"
             type="number"
@@ -65,6 +104,7 @@ class EditExpenseForm extends Component {
             onChange={this.changeHandler}
           />
           <MDBBtn type="submit">Save Changes</MDBBtn>
+          <MDBBtn onClick={this.deleteExpense}>Delete Expense</MDBBtn>
         </form>
       </div>
     );

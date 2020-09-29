@@ -29,9 +29,9 @@ class Expense extends Component {
           Expense Type: {this.props.expense.type}, Price:{" "}
           {this.props.expense.price}
         </span>
-        <span>
+        {/* <span>
           <MDBIcon icon="trash-alt" />
-        </span>
+        </span> */}
         <Modal show={this.state.showModal} close={this.hide} />
       </div>
     );
