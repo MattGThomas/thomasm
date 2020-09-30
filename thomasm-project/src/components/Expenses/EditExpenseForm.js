@@ -29,6 +29,26 @@ class EditExpenseForm extends Component {
     });
   };
 
+  autofill = () => {
+    const { id } = this.state;
+    Axios.get(`http://localhost:3000/expenses/${id}`)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        console.log(res.data.name);
+        const { id, name, type, price } = res.data;
+        this.setState({
+          id,
+          name,
+          type,
+          price,
+        });
+        console.log("this is state", this.state);
+      })
+      .catch((err) => {
+        console.log("err, ", err);
+      });
+  };
   editExpense = () => {
     const { name, type, price, id } = this.state;
     const payload = { name, type, price, id };
@@ -79,13 +99,20 @@ class EditExpenseForm extends Component {
           </p>
         </div>
         <form onSubmit={this.editExpense}>
-          <MDBInput
-            label="Expense ID"
-            type="number"
-            name="id"
-            value={this.state.id}
-            onChange={this.changeHandler}
-          />
+          <div className="d-flex justify-content-between">
+            <MDBInput
+              label="Expense ID"
+              type="number"
+              name="id"
+              value={this.state.id}
+              onChange={this.changeHandler}
+              style={{ width: "50%" }}
+            />
+
+            <span>
+              <MDBBtn onClick={this.autofill}>find expense</MDBBtn>
+            </span>
+          </div>
           <MDBInput
             label="Expense Name"
             type="text"
@@ -104,13 +131,14 @@ class EditExpenseForm extends Component {
           <MDBInput
             label="Price"
             name="price"
-            type="number"
+            type="text"
             value={this.state.price}
             onChange={this.changeHandler}
           />
           <MDBBtn type="submit">Save Changes</MDBBtn>
           <MDBBtn onClick={this.deleteExpense}>Delete Expense</MDBBtn>
         </form>
+
         <Modal show={this.state.showModal} close={this.hide} />
       </div>
     );

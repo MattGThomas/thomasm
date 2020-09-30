@@ -73,7 +73,7 @@ class AddExpenseForm extends Component {
           <MDBInput
             label="Price"
             name="price"
-            type="number"
+            type="text"
             value={this.state.price}
             onChange={this.changeHandler}
             required
