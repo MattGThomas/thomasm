@@ -12,6 +12,7 @@ class App extends Component {
     toggle_switch: false,
   };
 
+  // get request to retrieve the expenses from database
   componentDidMount() {
     Axios.get("http://localhost:3000/expenses")
       .then((res) => {
@@ -27,6 +28,8 @@ class App extends Component {
     });
   };
 
+  // shows either add expense form or edit expense form
+  // determined by the state of the toggle button
   showForm() {
     if (!this.state.toggle_switch) {
       return (
@@ -48,12 +51,15 @@ class App extends Component {
     }
   }
 
+  // helper function to toggle state of toggle_switch
+  // always sets it to false
   showAddExpense = () => {
     this.setState({
       toggle_switch: false,
     });
   };
 
+  // shows the text to add an expense
   showAdd() {
     if (!this.state.toggle_switch) {
       return (
@@ -76,11 +82,16 @@ class App extends Component {
       );
     }
   }
+
+  // helper function to toggle state of toggle_switch
+  // always sets it to true
   showEditExpense = () => {
     this.setState({
       toggle_switch: true,
     });
   };
+
+  // shows the text to edit an expense
   showEdit() {
     if (this.state.toggle_switch) {
       return (
@@ -104,6 +115,8 @@ class App extends Component {
     }
   }
 
+  // helper function to essentially reset the state of
+  // expenses once another function has run
   updateExpenses = (expenses) => {
     this.setState({
       expenses,
@@ -119,6 +132,8 @@ class App extends Component {
         console.log("err", err);
       });
   }
+
+  // gets total for the expenses price
   expenseTotal() {
     let { expenses } = this.state;
     let total = 0;
