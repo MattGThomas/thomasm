@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBBtn } from "mdbreact";
+
 import "./modal.css";
 
 const Modal = ({ close, show }) => {
@@ -13,7 +13,6 @@ const Modal = ({ close, show }) => {
           <br />
           then click the delete expense button
         </p>
-        <MDBBtn onClick={close}>close</MDBBtn>
       </section>
     </div>
   );

@@ -1,26 +1,107 @@
 import React, { Component } from "react";
-import { MDBContainer, MDBCard, MDBBtn, MDBRow, MDBCol } from "mdbreact";
+import { MDBContainer, MDBCard, MDBBtn, MDBCardBody } from "mdbreact";
 import Axios from "axios";
-// import Expense from "./components/Expenses/Expense.js";
+
 import ExpenseList from "./components/Expenses/ExpenseList";
 import AddExpenseForm from "./components/Expenses/AddExpenseForm.js";
 import EditExpenseForm from "./components/Expenses/EditExpenseForm.js";
-
+import "./App.css";
 class App extends Component {
   state = {
     expenses: [],
+    toggle_switch: false,
   };
 
   componentDidMount() {
     Axios.get("http://localhost:3000/expenses")
       .then((res) => {
-        console.log("this is res***", res);
         this.setState({ expenses: res.data.data });
-        console.log("************", this.state.expenses);
       })
       .catch((err) => {
         console.log(`this is the error: ${err}`);
       });
+  }
+  toggleSwitch = () => {
+    this.setState({
+      toggle_switch: !this.state.toggle_switch,
+    });
+  };
+
+  showForm() {
+    if (!this.state.toggle_switch) {
+      return (
+        <MDBCard style={{ height: "100%", width: "65%" }}>
+          <MDBCardBody>
+            <AddExpenseForm updateExpenses={this.updateExpenses} />
+          </MDBCardBody>
+        </MDBCard>
+      );
+    }
+    if (this.state.toggle_switch) {
+      return (
+        <MDBCard style={{ height: "100%", width: "65%" }}>
+          <MDBCardBody>
+            <EditExpenseForm updateExpenses={this.updateExpenses} />
+          </MDBCardBody>
+        </MDBCard>
+      );
+    }
+  }
+
+  showAddExpense = () => {
+    this.setState({
+      toggle_switch: false,
+    });
+  };
+
+  showAdd() {
+    if (!this.state.toggle_switch) {
+      return (
+        <p
+          style={{ paddingRight: "30px", color: "green" }}
+          onClick={this.showAddExpense}
+        >
+          <strong>ADD AN EXPENSE</strong>
+        </p>
+      );
+    } else {
+      return (
+        <p
+          style={{ paddingRight: "30px" }}
+          onClick={this.showAddExpense}
+          className="expense-toggle"
+        >
+          ADD AN EXPENSE
+        </p>
+      );
+    }
+  }
+  showEditExpense = () => {
+    this.setState({
+      toggle_switch: true,
+    });
+  };
+  showEdit() {
+    if (this.state.toggle_switch) {
+      return (
+        <p
+          style={{ paddingLeft: "30px", color: "green" }}
+          onClick={this.showEditExpense}
+        >
+          <strong>EDIT EXPENSE</strong>
+        </p>
+      );
+    } else {
+      return (
+        <p
+          style={{ paddingLeft: "30px" }}
+          onClick={this.showEditExpense}
+          className="expense-toggle"
+        >
+          EDIT EXPENSE
+        </p>
+      );
+    }
   }
 
   updateExpenses = (expenses) => {
@@ -38,47 +119,50 @@ class App extends Component {
         console.log("err", err);
       });
   }
+  expenseTotal() {
+    let { expenses } = this.state;
+    let total = 0;
+    for (let i = 0; i < expenses.length; i++) {
+      total += expenses[i].price;
+    }
+    return total;
+  }
 
-  // ********************************************************************************************
   render() {
-    // const display_expenses = expenses.map((expense) => {
-    //   return <Expense key={expense.id} expense={expense} id={expense.id} />;
-    // });
-
     return (
       <div>
         <MDBContainer>
-          <div style={{ paddingBottom: "3%" }}>
-            <MDBCard style={{ height: "250px" }}>
-              {/* {display_expenses} */}
-              {/* {this.state.expenses.map((expense) => {
-              return (
-                <Expense key={expense.id} expense={expense} id={expense.id} />
-              );
-            })} */}
-              <ExpenseList expenses={this.state.expenses} />
-            </MDBCard>
+          <div className="d-flex justify-content-between">
+            <h2>Expense Total: {this.expenseTotal()}</h2>
+            <MDBBtn color="danger" onClick={this.deleteAllExpenses}>
+              DELETE ALL EXPENSES
+            </MDBBtn>
           </div>
-          <MDBRow>
-            <MDBCol
-              // className="md-6 mb-6 d-flex align-items-stretch "
-              style={{ width: "100%" }}
-            >
-              {/* <MDBCol style={{ width: "100%" }}> */}
-              <MDBCard style={{ height: "100%" }}>
-                <AddExpenseForm updateExpenses={this.updateExpenses} />
-              </MDBCard>
-            </MDBCol>
-            {/* <MDBCol className="md-6 mb-6 d-flex align-items-stretch"> */}
-            <MDBCol style={{ width: "100%" }}>
-              <MDBCard style={{ height: "100%" }}>
-                <EditExpenseForm updateExpenses={this.updateExpenses} />
-              </MDBCard>
-            </MDBCol>
-          </MDBRow>
-          <MDBBtn color="danger" onClick={this.deleteAllExpenses}>
-            DELETE ALL EXPENSES
-          </MDBBtn>
+          <div style={{ paddingBottom: "3%" }}>
+            <div style={{ fontSize: "1rem" }}>
+              <ExpenseList expenses={this.state.expenses} />
+            </div>
+          </div>
+          <div>
+            <div className="d-flex justify-content-center">
+              {this.showAdd()}
+
+              <div className="ToggleSwitch ToggleSwitch__rounded">
+                <div className="ToggleSwitch__wrapper">
+                  <div
+                    className={`Slider ${
+                      this.state.toggle_switch && "isChecked"
+                    }`}
+                    onClick={this.toggleSwitch}
+                  ></div>
+                </div>
+              </div>
+              {this.showEdit()}
+            </div>
+            <div className="d-flex justify-content-center">
+              {this.showForm()}
+            </div>
+          </div>
         </MDBContainer>
       </div>
     );

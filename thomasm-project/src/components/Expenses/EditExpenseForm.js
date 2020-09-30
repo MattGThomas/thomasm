@@ -35,7 +35,6 @@ class EditExpenseForm extends Component {
 
     Axios.put("http://localhost:3000/expenses", payload)
       .then((response) => {
-        console.log(response);
         this.props.updateExpenses(response.data);
       })
       .catch((err) => {
@@ -45,35 +44,17 @@ class EditExpenseForm extends Component {
 
   deleteExpense = () => {
     const { id } = this.state;
-    const payload = { id };
-    console.log("********* this is id, payload before call", payload);
-    // console.log("**********************", typeof payload.id);
-    // parseInt(payload.id);
-    // console.log("***********************", typeof parseInt(payload.id));
-    // payload = parseInt(payload);
-    console.log(payload);
+
     if (!id) {
       alert("please enter an id");
     } else {
       Axios.delete(`http://localhost:3000/expenses/${id}`)
         .then((res) => {
           window.location.reload(true);
-          console.log("this is what is actually sending ", id, payload);
-          console.log(res);
-          // this.props.updateExpenses();
         })
         .catch((err) => {
           console.log("err, ", err);
         });
-
-      // axios.delete(URL, {
-      //   headers: {
-      //     Authorization: authorizationToken
-      //   },
-      //   data: {
-      //     source: source
-      //   }
-      // });
     }
   };
   selectChangeHandler = (evt) => {
@@ -83,18 +64,21 @@ class EditExpenseForm extends Component {
     });
   };
   render() {
-    // const { name, price, type, id } = this.state;
     return (
       <div>
         <div>
           <p>
             you can use this form to edit / delete{" "}
-            <i class="fas fa-info-circle" onClick={this.show} /> your current
-            expenses
+            <i
+              class="fas fa-info-circle"
+              onClick={this.show}
+              onMouseEnter={this.show}
+              onMouseLeave={this.hide}
+            />{" "}
+            your current expenses
           </p>
         </div>
         <form onSubmit={this.editExpense}>
-          {/* <form onSubmit={this.deleteExpense}> */}
           <MDBInput
             label="Expense ID"
             type="number"

@@ -37,14 +37,13 @@ server.get("/expenses/:id", function (req, res) {
     function (error, results, fields) {
       if (error) throw error;
       res.end(JSON.stringify(results[0]));
-      //   return res.send({ error: false, data: JSON.stringify(results[0]) });
     }
   );
 });
 
 server.post("/expenses", function (req, res) {
   let params = req.body;
-  console.log(params);
+
   connection.query("INSERT INTO expenses SET ?", params, function (
     error,
     results,
@@ -56,7 +55,6 @@ server.post("/expenses", function (req, res) {
 });
 
 server.put("/expenses", function (req, res) {
-  console.log(req.body);
   connection.query(
     "UPDATE `expenses` SET `name` =?, `type`=?, `price`=? where `id`=?",
     [req.body.name, req.body.type, req.body.price, req.body.id],
@@ -68,11 +66,9 @@ server.put("/expenses", function (req, res) {
 });
 
 server.delete("/expenses/:id", function (req, res) {
-  console.log("this is the request body for delete", req.body);
   connection.query(
     "DELETE FROM `expenses` WHERE `id`=?",
     [req.params.id],
-    // [req.params.id],
 
     function (error, results, fields) {
       if (error) throw error;
@@ -88,7 +84,6 @@ server.delete("/expenses", function (req, res) {
   });
 });
 
-// require("./expenses/expenses-router.js")(server);
 server.listen(3000, () => {
   console.log("server is running on port 3000");
 });

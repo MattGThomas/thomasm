@@ -9,26 +9,26 @@ class ExpenseList extends Component {
     items_per_page: 5,
   };
 
+  // function allows a page to be selected when clicking
   pageSelector = (evt) => {
     this.setState({
       current_page: Number(evt.target.id),
     });
   };
+
   render() {
     let { current_page, items_per_page } = this.state;
+
     const last_item = current_page * items_per_page;
     const first_item = last_item - items_per_page;
-
     const current_expenses = this.props.expenses.slice(first_item, last_item);
+
+    // displays items expenses to show in list for pagination
     const display_expenses = current_expenses.map((expense) => {
-      return (
-        <Expense
-          key={expense.id}
-          expense={expense}
-          //   deleteExpense={this.deleteExpense}
-        />
-      );
+      return <Expense key={expense.id} expense={expense} />;
     });
+
+    // creates page numbers for pagination
     const page_numbers = [];
     for (
       let i = 1;
@@ -46,17 +46,10 @@ class ExpenseList extends Component {
         </div>
       );
     });
+
     return (
       <div>
-        <h2>Expenses</h2>
-        <div>
-          {/* {this.props.expenses.map((expense) => (
-            <Expense
-              key={expense.id}
-              expense={expense}
-              //   deleteExpense={this.deleteExpense}
-            />
-          ))} */}
+        <div style={{ height: "175px" }} className="list">
           {display_expenses}
           <div className="expense-list-numbers">{display_page_numbers}</div>
         </div>
