@@ -12,10 +12,10 @@ server.use(bodyParser.json());
 server.use(cors());
 server.use(bodyParser.urlencoded({ extended: true }));
 
-const corsOptions = {
-  optionsSuccessStatus: 200,
-};
-
+// const corsOptions = {
+//   optionsSuccessStatus: 200,
+// };
+server.options("*", cors());
 server.get("/expenses", function (req, res) {
   connection.query("SELECT * FROM expenses", function (error, results, fields) {
     if (error) throw error;
