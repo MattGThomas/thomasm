@@ -77,5 +77,7 @@ server.delete("/expenses", function (req, res) {
 //   console.log("server is running on port 3000");
 // });
 
-server.listen(port);
-console.log(`server started on port, ${port}`);
+server.listen(port, () => {
+  console.log(`\n---* server is listening on ${port} *---\n`);
+});
+// console.log(`server started on port, ${port}`);
