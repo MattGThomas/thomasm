@@ -47,7 +47,7 @@ server.post("/expenses/add", function (req, res) {
   });
 });
 
-server.put("/expenses/update", cors(corsOptions), function (req, res) {
+server.put("/expenses/update", function (req, res) {
   connection.query(
     "UPDATE `expenses` SET `name` =?, `type`=?, `price`=? where `id`=?",
     [req.body.name, req.body.type, req.body.price, req.body.id],
