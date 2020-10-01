@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
   headers: {
     "Access-Control-Allow-Headers": "Content-Type",
     // "Access-Control-Allow-Origin": "https://www.example.com",
-    "Access-Control-Allow-Methods": "POST,GET,PUT,DELETE",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE",
     "Access-Control-Max-Age": 86400,
     "Content-Type": "application/json",
   },
