@@ -10,7 +10,7 @@ const connection = require("./config/connect.js");
 
 server.use(bodyParser.json());
 server.use(cors());
-server.use(bodyParser.urlencoded({ extended: true }));
+// server.use(bodyParser.urlencoded({ extended: true }));
 
 // const corsOptions = {
 //   // Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE,
