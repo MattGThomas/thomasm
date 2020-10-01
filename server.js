@@ -34,7 +34,7 @@ server.get("/expenses/:id", function (req, res) {
   );
 });
 
-server.post("/expenses/add", cors(corsOptions), function (req, res) {
+server.post("/expenses/add", function (req, res) {
   let params = req.body;
 
   connection.query("INSERT INTO expenses SET ?", params, function (
