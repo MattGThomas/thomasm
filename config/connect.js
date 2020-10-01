@@ -13,6 +13,7 @@ const connection = mysql.createConnection({
     // "Access-Control-Allow-Origin": "https://www.example.com",
     "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE",
     "Access-Control-Max-Age": 86400,
+    "Content-Type": "application/json",
   },
   //   port: 3306,
 });
