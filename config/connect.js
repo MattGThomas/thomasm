@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type",
 
-    "Access-Control-Allow-Methods": "OPTIONS, GET, POST, PUT, DELETE",
+    "Access-Control-Allow-Methods": " GET, POST, PUT, DELETE",
     "Access-Control-Max-Age": 86400,
     // "Content-Type": "text/plain",
     "Content-Type": "application/json",
