@@ -8,6 +8,12 @@ const connection = mysql.createConnection({
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
   database: dbConfig.DB,
+  headers: {
+    "Access-Control-Allow-Headers": "Content-Type",
+    // "Access-Control-Allow-Origin": "https://www.example.com",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE",
+    "Access-Control-Max-Age": 86400,
+  },
   //   port: 3306,
 });
 // if (port === 4205) {
