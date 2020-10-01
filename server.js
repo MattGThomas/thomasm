@@ -1,27 +1,16 @@
 const mysql = require("mysql");
-const dbConfig = require("./config/dbConfig");
+// const dbConfig = require("./config/dbConfig");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 // require("dotenv").config();
-
+const port = process.env.PORT || 4200;
 const server = express();
+const connection = require("./config/connect.js");
 
 server.use(bodyParser.json());
 server.use(cors());
 server.use(bodyParser.urlencoded({ extended: true }));
-
-const connection = mysql.createConnection({
-  host: dbConfig.HOST,
-  user: dbConfig.USER,
-  password: dbConfig.PASSWORD,
-  database: dbConfig.DB,
-});
-
-connection.connect((error) => {
-  if (error) throw error;
-  console.log("successfully connected to database");
-});
 
 server.get("/expenses", function (req, res) {
   connection.query("SELECT * FROM expenses", function (error, results, fields) {
@@ -84,6 +73,9 @@ server.delete("/expenses", function (req, res) {
   });
 });
 
-server.listen(3000, () => {
-  console.log("server is running on port 3000");
-});
+// server.listen(3000, () => {
+//   console.log("server is running on port 3000");
+// });
+
+server.listen(port);
+console.log(`server started on port, ${port}`);
