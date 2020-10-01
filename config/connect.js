@@ -10,12 +10,12 @@ const connection = mysql.createConnection({
   database: dbConfig.DB,
   headers: {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers":
-      "Origin, X-Request-With, Content-Type, Accept",
+    "Access-Control-Allow-Headers": "Content-Type",
 
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+    "Access-Control-Allow-Methods": "OPTIONS, GET, POST, PUT, DELETE",
     "Access-Control-Max-Age": 86400,
-    "Content-Type": "application/json",
+    "Content-Type": "text/plain",
+    // "Content-Type": "application/json",
   },
   //   port: 3306,
 });
