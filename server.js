@@ -2,14 +2,14 @@ const mysql = require("mysql");
 // const dbConfig = require("./config/dbConfig");
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require("cors");
+// const cors = require("cors");
 // require("dotenv").config();
 const port = process.env.PORT || 4200;
 const server = express();
 const connection = require("./config/connect.js");
 
 server.use(bodyParser.json());
-server.use(cors());
+// server.use(cors());
 server.use(bodyParser.urlencoded({ extended: true }));
 
 server.get("/expenses", function (req, res) {
