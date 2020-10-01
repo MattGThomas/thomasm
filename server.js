@@ -12,6 +12,10 @@ server.use(bodyParser.json());
 server.use(cors());
 server.use(bodyParser.urlencoded({ extended: true }));
 
+const corsOptions = {
+  optionsSuccessStatus: 200,
+};
+
 server.get("/expenses", function (req, res) {
   connection.query("SELECT * FROM expenses", function (error, results, fields) {
     if (error) throw error;
@@ -30,7 +34,7 @@ server.get("/expenses/:id", function (req, res) {
   );
 });
 
-server.post("/expenses/add", function (req, res) {
+server.post("/expenses/add", cors(corsOptions), function (req, res) {
   let params = req.body;
 
   connection.query("INSERT INTO expenses SET ?", params, function (
@@ -43,7 +47,7 @@ server.post("/expenses/add", function (req, res) {
   });
 });
 
-server.put("/expenses/update", function (req, res) {
+server.put("/expenses/update", cors(corsOptions), function (req, res) {
   connection.query(
     "UPDATE `expenses` SET `name` =?, `type`=?, `price`=? where `id`=?",
     [req.body.name, req.body.type, req.body.price, req.body.id],
